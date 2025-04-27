@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use rand::random;
 
 const VELOCITY_CHANGE_INTERVAL: f32 = 0.1;
 const START_MAX_RANDOM_VELOCITY: f32 = 300.0;
@@ -56,11 +57,11 @@ fn velocity_random_walk(
         if walker.velocity_change_timer.tick(time.delta()).just_finished() {
             walker.max_velocity += MAX_RANDOM_VELOCITY_INCREASE_STEP;
 
-            let random_x = rand::random::<f32>() * walker.max_velocity;
-            let random_y = rand::random::<f32>() * walker.max_velocity;
+            let random_x = random::<f32>() * walker.max_velocity;
+            let random_y = random::<f32>() * walker.max_velocity;
             
-            let x_direction = if rand::random::<bool>() { 1.0 } else { -1.0 };
-            let y_direction = if rand::random::<bool>() { 1.0 } else { -1.0 };
+            let x_direction = if random::<bool>() { 1.0 } else { -1.0 };
+            let y_direction = if random::<bool>() { 1.0 } else { -1.0 };
             
             walker.velocity = Vec2::new(random_x * x_direction, random_y * y_direction);
         }
